@@ -1,40 +1,25 @@
-# codetoany
-从微信接口“网页授权获取用户信息”中获取到code参数后，再将其值通过GET方式跳转传递给任何url。有效解决了在微信公众平台开发者中心“网页授权回调页面域名”只能设置一个的问题。
+# **codetoany**
+从微信公众号接口“网页授权获取用户信息”中获取`GET参数code`后，再将其通过GET方式跳转传递给其他url。解决了在微信公众平台只能设置一个“网页授权回调页面域名”造成的不能将`GET参数code`传递给其他多个域名的问题。
 
+## **环境需求**
+* php >= 5.4.0；
 
-# 更多功能
-* GET参数名`__r`可自定义；
-* 支持微信接口“网页授权获取用户信息”中两个有特殊含义的GET参数scope和state；
-* 跳转过程GET参数不丢失（除`__r`外）；
-* “网页授权回调页面域名”支持https方式；
+## 快速使用
+1. 假设将微信公众平台中“网页授权回调页面域名”设置为`www.example.com`；
+2. 打开`codetoany/getcodetourl.php`，将变量`$appId`的值改成自己的*微信公众号id*；
+3. 将codetoany中的所有文件部署到`http://www.example.com/codetoany/`；
+4. 微信内或使用<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1455784140&token=&lang=zh_CN" target="_blank">微信web开发者工具</a>访问`http://www.example.com/codetoany/getcodetourl.php?rk=lionsay`。顺利的话，页面将跳转到类似这样的url：`http://lionsay.com/?a=123&b=test&code=0318PVx00bTFzB1JOny00YMRx008PVxS&state=STATE`。这样就实现了将`GET参数code`传递给了**自定义设置的url**：`http://lionsay.com/?a=123&b=test`；
 
+## 深度理解
+1. **跳转url**：在`codetoany/getcodetourl.php`中，变量`$redirectUrl`就是跳转url的配置，是一维数组，元素的键作为GET参数rk的值，元素的值即为具体的跳转url，`GET参数code`将附加到该url中进行跳转。具体跳转到哪一个url由其对应的键决定，而该键将从`GET参数rk`中获取。可以设置一个或多个元素；
+2. **特殊GET参数**：
+	* `rk`：rk值的作用是确定具体跳转的url。可以自定义rk这个名称，在`codetoany/getcodetourl.php`中调用类方法`\lion\weixin\library::getCodeToUrl()`时，为其第二个参数传递一个字符串，这个参数的默认值为`rk`；
+	* `scope`和`state`：微信公众号接口“网页授权获取用户信息”中的参数scope和state可以作为GET参数传递给`codetoany/getcodetourl.php`，进而再传递给该接口。`GET参数scope`的默认值为`snsapi_base`，`GET参数state`的默认值为`STATE`。参数的含义请参考<a href="http://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html" target="_blank">微信公众平台开发者文档</a>；
+	* `__lion_from_weixin=yes`：如果不跳转或跳转不合法，url中就会出现此参数，这是程序内部使用的，用户无需关心；
+3. **GET参数的保持和覆盖**：除了`GET参数rk`外，传递给`codetoany/getcodetourl.php`的任何GET参数都将继续传递给跳转url。当传递给`codetoany/getcodetourl.php`的GET参数与跳转url中的GET参数有同名参数时，可以选择是否覆盖，在`codetoany/getcodetourl.php`中调用类方法`\lion\weixin\library::getCodeToUrl()`时，为其第三个参数传递一个布尔值，这个参数的默认值为`false`即不覆盖，但无论如何这三个`GET参数code、scope和state`总是强制覆盖；
+4. **https**：如果微信公众平台“网页授权回调页面域名”使用**https**方式访问，在`codetoany/getcodetourl.php`中实例化类`\lion\weixin\library\Authorize`时，请务必为其构造函数的第二个参数传递布尔值`true`，这个参数的默认值为`false`即不使用**https**；
 
-# 使用帮助
-
-#### **一些假设**
-* 微信公众平台开发者中心将“网页授权回调页面域名”设置为`www.example.com`这个域名；
-* codetoany代码部署到`http://www.example.com/weixin/`这个目录；
-* 将code参数值传递给`http://www.lionsay.com/?a=123&b=value1`这个url；
-* 使用“微信web开发者工具”进行调试，工具地址为`https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1455784140&token=&lang=zh_CN`；
-
-#### **快速使用**
-1. demo.php中将变量`$appId`修改成您自己的微信公众号id；
-2. “微信web开发者工具”内访问`http://www.example.com/weixin/demo.php?__r=test`；
-3. 注意观察页面地址的变化；
-
-#### **其他设置**
-* GET参数名`__r`可自定义，如demo.php中`$authorize->redirectWithCode($redirectUrl, 'redirectkey')`将第二个参数将设置成`redirectkey`，访问地址就变成了`http://www.example.com/weixin/demo.php?redirectkey=test`；
-* `__r`的取值以及接收code参数的url可自定义，如demo.php中将`$redirectUrl`设置为`array('abc' => 'finalUrl')`，则`__r=abc`，接收code参数的url为`finalUrl`；
-* 当“网页授权回调页面域名”为https方式时，在实例化类`\lion\weixin\library\Authorize`的时候，请将第二个参数设为`true`，如demo.php中`new \lion\weixin\library\Authorize($appId, true)`；
-* 支持微信接口“网页授权获取用户信息”中两个有特殊含义的GET参数scope和state。例如以下url都是合法的：
-
-	`http://www.example.com/weixin/demo.php?__r=test&scope=snsapi_userinfo`
-
-	`http://www.example.com/weixin/demo.php?__r=test&state=codetest`
-
-	`http://www.example.com/weixin/demo.php?__r=test&scope=snsapi_userinfo&state=codetest`
-
-
-# 问题反馈
-* 在一派良言`http://lionsay.com`留言；
-* 发邮件至`lionskys[at]126.com`；
+## 问题反馈
+* 在<a href="https://github.com/weixin-lion/codetoany/issues/" target="_blank" title="github上的codetoany项目的问题收集页">github</a>提交问题（**推荐**）；
+* 关注<a href="http://weibo.com/236127789" target="_blank">新浪微博<a>和<a href="http://t.qq.com/lionskys" target="_blank">腾讯微博</a>；
+* 在<a href="http://lionsay.com/codetoany.html" target="_blank" title="个人博客上的codetoany项目的问题收集页">一派良言</a>提交留言；
