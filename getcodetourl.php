@@ -1,6 +1,6 @@
 <?php
 /**
- * 从微信公众号接口“网页授权获取用户信息”中获取GET参数code后，再将其通过GET方式跳转传递给其他url。
+ * 从微信公众号接口“网页授权获取用户信息”中获取get参数code后，再将其通过get方式跳转传递给任何域名下的url。
  *
  * @author: lion
  * @blog: http://lionsay.com

@@ -21,12 +21,12 @@ class Authorize
 	public $callbackDomainUseHttps = false;
 
 	/**
-	 * string: 用于标识来自微信服务器的请求的GET参数名。
+	 * string: 用于标识来自微信服务器的请求的get参数名。
 	 */
 	public $fromWeixinGetParamName = '__lion_from_weixin';
 
 	/**
-	 * string: 用于标识来自微信服务器的请求的GET参数值。
+	 * string: 用于标识来自微信服务器的请求的get参数值。
 	 */
 	public $fromWeixinGetParamValue = 'yes';
 
@@ -39,13 +39,13 @@ class Authorize
 	}
 
 	/**
-	 * 从微信公众号接口“网页授权获取用户信息”中获取GET参数code后，再将其通过GET方式跳转传递给其他url。
+	 * 从微信公众号接口“网页授权获取用户信息”中获取get参数code后，再将其通过get方式跳转传递给任何域名下的url。
 	 *
-	 * @param array $redirectUrl: 跳转url的配置，是一维数组，元素的键作为$redirectUrlGetParamName参数对应的GET参数的值，
-	 * 	元素的值即为具体的跳转url，GET参数code将附加到该url中进行跳转。具体跳转到哪一个url由其对应的键决定，而该键将从GET参数中获取。
+	 * @param array $redirectUrl: 跳转url的配置，是一维数组，元素的键作为$redirectUrlGetParamName参数对应的get参数的值，
+	 * 	元素的值即为具体的跳转url，get参数code将附加到该url中进行跳转。具体跳转到哪一个url由其对应的键决定，而该键将从get参数中获取。
 	 * 	可以设置一个或多个元素；
-	 * @param string $redirectUrlGetParamName: 获取$redirectUrl数组中的跳转url时使用的GET参数名；
-	 * @param bool $overrideParam: url中的GET参数是否覆盖$redirectUrl数组中的跳转url的GET参数。无论如何这三个GET参数code、scope和state总是强制覆盖；
+	 * @param string $redirectUrlGetParamName: 获取$redirectUrl数组中的跳转url时使用的get参数名；
+	 * @param bool $overrideParam: url中的get参数是否覆盖$redirectUrl数组中的跳转url的get参数。无论如何这三个get参数code、scope和state总是强制覆盖；
 	 */
 	public function getCodeToUrl(array $redirectUrl = [], $redirectUrlGetParamName = 'rk', $overrideParam = false)
 	{
