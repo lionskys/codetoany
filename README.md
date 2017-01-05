@@ -20,9 +20,9 @@
 4. 在微信内或使用微信web开发者工具访问`http://www.test.com/codetoany/getcode.php?auk=demo1`，顺利的话，页面将跳转到类似这样的url：`http://lionsay.com/?abc=123&code=0318PVx00bTFzB1JOny00YMRx008PVxS&state=STATE`；
 
 ## 攻略指南
-1. **自定义`auk=demo1`中的`demo1`**：编辑`codetoany/getcode.php`，修改数组变量`$redirectUrlConfig`的键`demo1`；
-2. **自定义`auk=demo1`时的`授权url`（即接收`授权code`的url，最终跳转的url）**：编辑`codetoany/getcode.php`，修改数组变量`$redirectUrlConfig`的键`demo1`对应的值；
-3. **自定义`auk=demo1`中的`auk`**：编辑`codetoany/getcode.php`，修改方法`getCodeToUrl()`的第二个参数的值；
+1. 要自定义`auk=demo1`中的`demo1`，可以编辑`codetoany/getcode.php`，修改数组变量`$redirectUrlConfig`的键`demo1`；
+2. 要自定义`auk=demo1`时的`授权url`（即接收`授权code`的url，最终跳转的url），可以编辑`codetoany/getcode.php`，修改数组变量`$redirectUrlConfig`的键`demo1`对应的值；
+3. 要自定义`auk=demo1`中的`auk`，可以编辑`codetoany/getcode.php`，修改方法`getCodeToUrl()`的第二个参数的值；
 4. 网页授权接口中的get参数`scope`和`state`可以以get参数的形式传递给`codetoany/getcode.php`，程序会把它们再传递给接口；
 5. 除了get参数`auk`外，传递给`codetoany/getcode.php`的任何get参数都会以get参数的形式再传递给`授权url`；
 6. 如果网页授权回调域名使用https协议访问，那么务必编辑`codetoany/getcode.php`，将类`lion\weixin\library\Authorize`的属性`$isHttps`的值设置为`ture`；
