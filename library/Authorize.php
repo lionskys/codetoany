@@ -30,10 +30,10 @@ class Authorize
 				if (!empty($authorizeUrlConfig[$authorizeUrlKey])) {
 					$finalAuthorizeUrl = $authorizeUrlConfig[$authorizeUrlKey];
 					$filterGetParamName = [$this->_isFromWeixinGetParamName, $authorizeUrlGetParamName];
-					$forceGetParamName = ['code', 'scope', 'state'];
+					$forceGetParamName = ['code', 'state'];
 					$newGetParam = [];
 					foreach ($_GET as $k => $v) {
-						if (!in_array($k, $filterGetParamName) && ($isOverrideAuthorizeUrlGetParam || in_array($k, $forceGetParamName) || !preg_match("/[\?|\&]{$k}\=/", $finalAuthorizeUrl))) {
+						if (in_array($k, $forceGetParamName) || (!in_array($k, $filterGetParamName) && ($isOverrideAuthorizeUrlGetParam || !preg_match("/[\?|\&]{$k}\=/", $finalAuthorizeUrl)))) {
 							$newGetParam[$k] = $v;
 						}
 					}
