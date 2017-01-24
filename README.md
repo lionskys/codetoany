@@ -41,8 +41,8 @@
 [5]: <https://github.com/weixin-lion/codetoany/issues/> "托管于github"
 [6]: <http://lionsay.com/asset/image/face/qq/woshou.png> "谢谢"
 [7]: <http://lionsay.com/asset/image/face/qq/huaixiao.png> "卖萌"
-[8]: <http://lionsay.com/asset/image/qrcode_alipay_240_264.jpg> "支付宝扫一扫打赏"
-[9]: <http://lionsay.com/asset/image/qrcode_weixin_240_264.jpg> "微信扫一扫打赏"
+[8]: <http://lionsay.com/asset/image/qrcode_alipay_230_253.jpg> "支付宝扫一扫打赏"
+[9]: <http://lionsay.com/asset/image/qrcode_weixin_230_253.jpg> "微信扫一扫打赏"
 
 <!--
 简述（用于搜索）：微信公众号平台网页授权接口中获取到的授权code传递给（即一个微信公众号网页授权给）任何其他多个回调域名下的url，解决了只能设置一个网页授权回调域名的问题，解决了redirect_uri参数错误的问题。
