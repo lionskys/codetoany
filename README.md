@@ -1,5 +1,5 @@
-# **CodeToAny**：**一个**微信公众号网页授权给**多个**域名
-把从微信网页授权接口中获取到的`授权code`以get参数的形式传递给**任何域名**下的url。
+# **CodeToAny**：**一个**微信公众号网页授权给**任何**域名下的url
+把从微信网页授权接口中获取到的`授权code`以get参数的形式传递给**任何**域名下的url。
 
 ## 联系作者
 * 进淘宝店[乐享良品网站开发][1]使用阿里旺旺即时通讯（可能是有偿服务）；
@@ -8,9 +8,9 @@
 * 在[CodeToAny源码页][5]留言；
 
 ## 打赏捐赠
-如果您觉得本程序不错，欢迎打赏我给予小小的支持，谢过！！！![握手][6]![坏笑][7]
+如果您觉得本程序不错，欢迎打赏我给予小小的支持，谢过！![谢谢][6]![卖萌][7]
 
-![支付宝二维码][8] ![微信二维码][9]
+![支付宝二维码][8]　　　　![微信二维码][9]
 
 ## 成功案例
 微擎、微赞、discuz插件、wordpress插件
@@ -41,5 +41,9 @@
 [5]: <https://github.com/weixin-lion/codetoany/issues/> "托管于github"
 [6]: <http://lionsay.com/asset/image/face/qq/woshou.png> "谢谢"
 [7]: <http://lionsay.com/asset/image/face/qq/huaixiao.png> "卖萌"
-[8]: <http://lionsay.com/asset/image/qrcode_alipay.jpg> "支付宝扫一扫打赏作者"
-[9]: <http://lionsay.com/asset/image/qrcode_weixin.jpg> "微信扫一扫打赏作者"
+[8]: <http://lionsay.com/asset/image/qrcode_alipay_300_330.jpg> "支付宝扫一扫打赏"
+[9]: <http://lionsay.com/asset/image/qrcode_weixin_300_330.jpg> "微信扫一扫打赏"
+
+<!--
+简述（用于搜索）：微信公众号平台网页授权接口中获取到的授权code传递给（即一个微信公众号网页授权给）任何其他多个回调域名下的url，解决了只能设置一个网页授权回调域名的问题，解决了redirect_uri参数错误的问题。
+-->
