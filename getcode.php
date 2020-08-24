@@ -1,7 +1,6 @@
 <?php
 /**
  * @author: lion
- * @link: http://lionsay.com/codetoany.html
  */
 
 require 'library/Authorize.php';
