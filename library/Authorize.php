@@ -3,7 +3,6 @@
  * 微信网页授权类
  *
  * @author: lion
- * @link: http://lionsay.com/codetoany.html
  */
 
 namespace lion\weixin\library;
